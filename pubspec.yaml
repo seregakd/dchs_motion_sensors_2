@@ -1,6 +1,6 @@
 name: dchs_motion_sensors
 description: Flutter plugin for accessing the Android and iOS accelerometer, gyroscope, magnetometer, and orientation sensors.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/dariocavada/dchs_motion_sensors
 
 environment:
