@@ -114,20 +114,29 @@ public class SwiftMotionSensorsPlugin: NSObject, FlutterPlugin {
 class AccelerometerStreamHandler: NSObject, FlutterStreamHandler {
     private let motionManager = CMMotionManager()
     private let queue = OperationQueue()
+    private var eventSink: FlutterEventSink?
 
     func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        self.eventSink = events
+
         if motionManager.isAccelerometerAvailable {
-            motionManager.startAccelerometerUpdates(to: queue) { (data, error) in
-                if let acceleration = data?.acceleration {
-                    events([-acceleration.x * GRAVITY, -acceleration.y * GRAVITY, -acceleration.z * GRAVITY])
+            motionManager.startAccelerometerUpdates(to: queue) { [weak self] (data, error) in
+                guard let strongSelf = self else { return }
+                if let eventSink = strongSelf.eventSink, let acceleration = data?.acceleration {
+                    DispatchQueue.main.async {
+                        eventSink([-acceleration.x * GRAVITY, -acceleration.y * GRAVITY, -acceleration.z * GRAVITY])
+                    }
                 }
             }
+        } else {
+            return FlutterError(code: "UNAVAILABLE", message: "Accelerometer not available", details: nil)
         }
         return nil
     }
 
     func onCancel(withArguments arguments: Any?) -> FlutterError? {
         motionManager.stopAccelerometerUpdates()
+        eventSink = nil
         return nil
     }
 
