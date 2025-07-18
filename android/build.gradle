@@ -1,8 +1,10 @@
+package android
+
 group 'finaldev.motion_sensors'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '2.2.0'
     repositories {
         google()
         mavenCentral()
@@ -40,6 +42,10 @@ android {
     }
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
