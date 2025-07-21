@@ -4,14 +4,14 @@ group 'finaldev.motion_sensors'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.10'
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -44,9 +44,9 @@ android {
         disable 'InvalidPackage'
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8' //"17"
-    }
+//    kotlinOptions {
+//        jvmTarget = '1.8' //"17"
+//    }
 }
 
 dependencies {
