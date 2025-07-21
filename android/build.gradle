@@ -44,9 +44,9 @@ android {
         disable 'InvalidPackage'
     }
 
-//    kotlinOptions {
-//        jvmTarget = '1.8' //"17"
-//    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
